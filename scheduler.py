@@ -21,10 +21,6 @@ caption='''Follow @success_100x
 '''
 
 url='https://business.facebook.com/creatorstudio/?reference=visit_from_seo&mode=instagram&tab=instagram_content_posts&collection_id=all_pages'
-# class Scheduler:
-# 	def __init__(self):
-# 		self.username=input("Facebook username: ")
-# 		self.password=getpass.getpass()
 
 def login(username,password):
 	driver.get(url)
@@ -137,45 +133,3 @@ for x in range(180):
 	print(str(i))
 os.system('cls')
 print(str(i))
-
-
-# if __name__=="__main__":
-# 	url='https://business.facebook.com/creatorstudio/?reference=visit_from_seo&mode=instagram&tab=instagram_content_posts&collection_id=all_pages'
-# 	shandler=Scheduler()
-# 	driver=webdriver.Chrome()
-# 	try:
-# 		shandler.login()
-# 		print("Login Successful")
-# 	except:
-# 		print("Login Failed")
-# 		exit(0)
-# 	now=dt.datetime.now().date()
-# 	autoit.send("{ALT TAB}")
-# 	days=input("Timedelta(number of days you want to skip from today): ")
-# 	now+=dt.timedelta(days=int(days))
-# 	print("Creator studio allows scheduling for 180 days in future only")
-# 	speriod=input("Number of days you want to schedule: ")
-# 	print(f"posts will be schedeled for {speriod} days starting from {now}")
-# 	print("To set custom scheduling time you can edit the script")
-# 	time.sleep(1)
-# 	os.system('cls')
-# 	pageindex=input("Page index: ")
-# 	foldername=input("Folder: ")
-# 	path=os.path.join(os.getcwd(),foldername)
-# 	db=os.listdir(path)
-# 	i=0
-# 	print("ohk, now sit back and relax... & let me do the job...")
-# 	time.sleep(1)
-# 	for x in range(int(speriod)):
-# 		datestr=(now+dt.timedelta(days=x)).strftime('%m/%d/%Y')
-# 		time.sleep(5)
-# 		shandler.schedule(pageindex,os.path.join(path,db[i]),caption,datestr,'9','15','a')
-# 		shandler.schedule(pageindex,os.path.join(path,db[i+1]),caption,datestr,'01','15','p')
-# 		shandler.schedule(pageindex,os.path.join(path,db[i+2]),caption,datestr,'6','15','p')
-# 		shandler.schedule(pageindex,os.path.join(path,db[i+3]),caption,datestr,'9','15','p')
-# 		i+=4
-# 		per=round((x*100)/int(speriod))
-# 		sys.stdout.write(str(speriod%x)+"% Done")
-# 		sys.stdout.flush()
-# 	os.system('cls')
-# 	print("Done")
