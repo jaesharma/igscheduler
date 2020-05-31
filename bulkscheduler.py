@@ -38,8 +38,6 @@ class Scheduler(object):
     	    self.driver.execute_script("arguments[0].click();",element)
     	    #caption
     	    element=self.driver.find_elements_by_class_name('_1mf')[0]
-    	    # os.system(f"echo {config["caption"]} | clip")
-    	    # time.sleep(1)
     	    element.send_keys(Keys.CONTROL, 'v')
     	    self.driver.find_elements_by_class_name('_3-99')[0].click() #file upload button
     	    time.sleep(1)
@@ -131,6 +129,7 @@ def configuration():
                 curr_configs[key]=int(changes) if key in int_keys else changes
     with open('config.json','w') as fh:
         json.dump(curr_configs,fh,indent=4)
+    os.system(f'echo {config["caption"]}|clip')
     print("ALL SET!!")
 
 def set_initials():
@@ -149,6 +148,7 @@ def main():
         set_initials()
     with open('config.json','r') as fh:
         config=json.load(fh)
+    os.system(f'echo {config["caption"]}|clip')
     while True:
         logo()
         print("1.Download\n2.Schedule\n3.Configure\n4.Exit")
