@@ -1,3 +1,3 @@
 selenium
-autoit
+pyautoit
 instaloader

@@ -45,9 +45,11 @@ class Scheduler(object):
             #caption
             element=self.driver.find_elements_by_class_name('_1mf')[0]
             #os.system(f"echo {captions[str(random.randint(0,len(captions)-1))]} | clip")
-            time.sleep(1)
             #element.send_keys(Keys.CONTROL, 'v')
-            element.send_keys(self.captions[str(random.randint(0,len(self.captions)-1))])
+            caption=""
+            if len(self.captions):
+                caption=self.captions[str(random.randint(0,len(self.captions)-1))]
+            element.send_keys(caption)
             self.driver.find_elements_by_class_name('_82ht')[0].click()
             # self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div/div[2]/div[1]/div/div[5]/div/div/div/span').click() #file upload button
             time.sleep(1)
@@ -175,8 +177,6 @@ def getCaptions():
     if os.path.exists('./captions.json'):
         with open('captions.json','r') as fh:
             captions=json.load(fh)
-    if not len(captions):
-        captions["0"]=""
     return captions
 
 def getConfig():
