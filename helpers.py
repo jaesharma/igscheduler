@@ -4,6 +4,7 @@ from optparse import OptionParser
 
 L = instaloader.Instaloader()
 
+colors={'red':'\033[5;31m','green':'\033[5;32m','yellow':'\033[5;33m','blue':'\033[5;34m','pink':'\033[5;35m','sky':'\033[5;36m','white':'\033[5;37m'}
 url="https://facebook.com/creatorstudio"
 igurl="https://business.facebook.com/creatorstudio?tab=instagram_content_posts&mode=instagram&collection_id=free_form_collection&content_table=INSTAGRAM_POSTS"
 

@@ -1,21 +1,22 @@
-﻿import os,time,autoit,sys,random,json
+﻿import os,time,autoit,sys,random,json,getpass
 import datetime as dt
 from selenium import webdriver
 from helpers import *
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-str_keys=["username","password","folder"]
-int_keys=["pageindex","daystoskip"]
-
 class Scheduler(object):
     def __init__(self):
         if not os.path.exists('./config.json'):
-            print(f"Initial configuration file does not exist\n{'-'*12}\nsetting up configuration file")
+            print(colors['green'],f"Initial configuration file does not exist\n{'-'*12}\nsetting up configuration file",colors['white'],sep="")
             setInitials()
         self.config=getConfig()
         self.attempt=15
-        self.fileCount=len(os.listdir(self.config["folder"]))
+        try:
+            self.fileCount=len(os.listdir(self.config["folder"]))
+        except FileNotFoundError:
+            print(colors['red'],"The folder in configuration does not exist, make sure you spell the folder name correct & it exist in current folder.\nReset the configurtion.",colors['white'],sep="")
+            sys.exit(0)
         self.captions=getCaptions()
         self.driver=webdriver.Chrome()
 
@@ -29,10 +30,10 @@ class Scheduler(object):
             self.driver.find_element_by_id('loginbutton').click()
             time.sleep(1)
             self.driver.get(igurl)
-            print("Logged in")
+            print(colors["green"],"Logged in",sep="")
         except Exception as err:
-            print("Login Failed\n",err)
-            exit()
+            print(colors["red"],"Login Failed\n",err)
+            sys.exit()
 
     def upload(self,path,date,h,m,ap):
         try:
@@ -91,7 +92,7 @@ class Scheduler(object):
         except KeyboardInterrupt:
             main()
         except Exception as e:
-            print(e)
+            print(colors["red"],e,sep="")
             self.attempt-=1
             if autoit.win_exists('Open'):
                 autoit.win_close('Open')
@@ -103,7 +104,7 @@ class Scheduler(object):
                 self.err()
 
     def err(self):
-        print("something went wrong, check connection and try again.")
+        print(colors["red"],"something went wrong, check connection and try again.",sep="")
         exit(0)
 
     def saveConfig(self):
@@ -127,7 +128,7 @@ class Scheduler(object):
         iterator=180-self.config["daystoskip"]
         for x in range(iterator):
             datestr=(now+dt.timedelta(days=x)).strftime('%m/%d/%Y')
-            print(datestr)
+            print(colors["sky"],datestr,colors["white"],sep="")
             self.schedule(self.getpost(),datestr,'9','15','a')
             self.schedule(self.getpost(),datestr,'11','15','a')
             self.schedule(self.getpost(),datestr,'01','15','p')
@@ -139,15 +140,16 @@ class Scheduler(object):
             cls()
 
 def setInitials():
-        initials=dict()
-        for key in str_keys:
-            initials[key]=input(f'{key}: ')
-        for key in int_keys:
-            initials[key]=int(input(f'{key}: ') or '0')
-            if key=="daystoskip" and not initials[key]:
-                initials[key]=1
-        with open('config.json','w') as fh:
-            json.dump(initials,fh,indent=4)
+    configs=dict()
+    configs["username"]=input("Enter fb business account username: ")
+    configs["password"]=getpass.getpass("fb business account password: ")
+    configs["folder"]=input("Folder name which contains the posts: ")
+    configs["pageindex"]=int(input("Index of page in creator studio panel: ") or 0)
+    configs["daystoskip"]=int(input("How many days to skip from today(dafault 1,schedule from tomm.): ") or 1)
+    with open('config.json','w') as fh:
+        json.dump(configs,fh,indent=4)
+    print(colors["yellow"],"="*5,"All set","="*5,colors["white"],sep="")
+    time.sleep(.6)
 
 def configuration():
     if not os.path.exists('./config.json'):
@@ -155,12 +157,15 @@ def configuration():
     else:
         with open('config.json','r') as fh:
             configs=json.load(fh)
-            for key in configs.keys():
-                changes=input(f'\t\t{key}({configs[key]}): ')
-                if changes:
-                    configs[key]=int(changes) if key in int_keys else changes
-            with open('config.json','w') as fh:
-                json.dump(configs,fh,indent=4)
+        configs["username"]=str(input(f"Enter fb business account username: ") or configs["username"])
+        configs["password"]=str(getpass.getpass("fb business account password: ") or configs["password"])
+        configs["folder"]=str(input("Folder name which contains the posts: ") or configs["folder"])
+        configs["pageindex"]=int(input("Index of page in creator studio panel: ") or configs["pageindex"])
+        configs["daystoskip"]=int(input("How many days to skip from today(dafault 1,schedule from tomm.): ") or configs["daystoskip"])
+        with open('config.json','w') as fh:
+            json.dump(configs,fh,indent=4)
+    print(colors["green"],"="*5,"All set","="*5,colors["white"],sep="")
+    time.sleep(.6)
 
 def addCaption():
     print("Enter caption(press 'ctrl+z & Enter' when you are done): ")
