@@ -1,7 +1,18 @@
+import random
 import instaloader,time,os
 from optparse import OptionParser
 
 L = instaloader.Instaloader()
+
+captions=[]
+
+def getCaptions():
+    if(not len(captions)):
+        return "empty"
+    return captions[random.randint(0,len(captions)-1)]
+
+def addCaption(caption):
+    captions.append(str(caption))
 
 def download(instauser,count):
 	c=0
