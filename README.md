@@ -5,10 +5,15 @@ This is selenium based automation tool. which can scheduler your posts for next 
 - Download chrome driver from [here](https://chromedriver.chromium.org/downloads)
 - run 
   ```
+  pip install -r requirements.txt
+  ```
+  ```
   python3 bulkscheduler.py
   ```
 
-If you're running this first time set configs first, & atleast set one caption, which can included hashtag sets.
+# Working Screenshots #
+![Screenshot1](screenshots/ss1.png)
+![Screenshot1](screenshots/ss2.png)
 
 # Contribution #
-If you find something wrong or bug in this script, raise an issue or contact me directly.
+If you find something wrong or want some new feature to get added in this script, raise an issue or contact me directly.
