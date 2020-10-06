@@ -1,4 +1,4 @@
-﻿import os,time,autoit,sys,random,json,getpass
+﻿import os,time,autoit,sys,random,json,getpass,clipboard
 import datetime as dt
 from selenium import webdriver
 from helpers import *
@@ -45,12 +45,11 @@ class Scheduler(object):
             self.driver.execute_script("arguments[0].click();",element)
             #caption
             element=self.driver.find_elements_by_class_name('_1mf')[0]
-            #os.system(f"echo {captions[str(random.randint(0,len(captions)-1))]} | clip")
-            #element.send_keys(Keys.CONTROL, 'v')
             caption=""
             if len(self.captions):
                 caption=self.captions[str(random.randint(0,len(self.captions)-1))]
-            element.send_keys(caption)
+            clipboard.copy(caption)
+            element.send_keys(Keys.CONTROL, 'v')
             self.driver.find_elements_by_class_name('_82ht')[0].click()
             # self.driver.find_element_by_xpath('/html/body/div[6]/div/div/div/div[2]/div[1]/div/div[5]/div/div/div/span').click() #file upload button
             time.sleep(1)

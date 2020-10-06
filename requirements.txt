@@ -1,3 +1,4 @@
 selenium
 pyautoit
 instaloader
+clipboard
