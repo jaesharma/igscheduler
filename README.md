@@ -1,9 +1,11 @@
-## Bulk Scheduler for Instagram ##
+## Bulk Scheduler for Instagram
+
 This is selenium based automation tool. which can scheduler your posts for next 6 months for instagram.
 
-# Usage: #
+# Usage:
+
 - Download chrome driver from [here](https://chromedriver.chromium.org/downloads)
-- run 
+- run
   ```
   pip install -r requirements.txt
   ```
@@ -11,9 +13,11 @@ This is selenium based automation tool. which can scheduler your posts for next 
   python3 bulkscheduler.py
   ```
 
-# Working Screenshots #
+# Working Screenshots
+
 ![Screenshot1](screenshots/ss1.png)
 ![Screenshot1](screenshots/ss2.png)
 
-# Contribution #
-If you find something wrong or want some new feature to get added in this script, raise an issue or contact me directly.
+# Contribution
+
+If you find any issue or want some new feature to get added in this script, raise an issue or contact me directly.

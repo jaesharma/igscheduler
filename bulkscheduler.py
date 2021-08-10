@@ -24,7 +24,7 @@ class Scheduler(object):
         self.driver.maximize_window()
         try:
             self.driver.get(url)
-            self.driver.find_element_by_xpath("//div[@id='u_0_0']/div[2]/div/div[2]/div/div/div/div[2]/div/div/span/div/div").click()
+            self.driver.find_elements_by_class_name('rwb8dzxj')[2].click()
             self.driver.find_element_by_id('email').send_keys(self.config["username"])
             self.driver.find_element_by_id('pass').send_keys(self.config["password"])
             self.driver.find_element_by_id('loginbutton').click()
@@ -37,11 +37,11 @@ class Scheduler(object):
 
     def upload(self,path,date,h,m,ap):
         try:
-            self.driver.find_elements_by_class_name('rwb8dzxj')[3].click() #create post button
+            self.driver.find_elements_by_class_name('rwb8dzxj')[2].click() #create post button
             time.sleep(1)
-            self.driver.find_elements_by_class_name('rwb8dzxj')[9].click() #instagram feed button
+            self.driver.find_elements_by_class_name('rwb8dzxj')[45].click() #instagram feed button
             time.sleep(2)
-            element=self.driver.find_elements_by_class_name('_4ik4')[14+self.config['pageindex']] #page click
+            element=self.driver.find_elements_by_class_name('_4ik4')[9+self.config['pageindex']] #page click
             self.driver.execute_script("arguments[0].click();",element)
             #caption
             element=self.driver.find_elements_by_class_name('_1mf')[0]
@@ -83,7 +83,7 @@ class Scheduler(object):
             #set AM/PM
             element=self.driver.find_elements_by_class_name('_4nx3')[2]
             actions.move_to_element(element).click().send_keys(ap).perform()
-            self.driver.find_elements_by_class_name('_43rm')[3].click()   #schedule button 
+            self.driver.find_elements_by_class_name('_43rm')[1].click()   #schedule button 
             time.sleep(5)
             if os.path.splitext(path)[1]=='.mp4':
                 time.sleep(5)
